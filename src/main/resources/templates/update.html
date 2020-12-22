@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p>update student</p>
+<form action="#" th:action="@{/student/update}" th:object="${student}" method="post">
+    <p hidden><input type="number" th:field="*{id}"></p>
+    <p>name: <input type="text" th:field="*{name}"></p>
+    <p>email: <input type="text" th:field="*{email}"></p>
+    <p>supervisor:
+        <select th:field="*{supervisor.id}">
+            <option th:each="supervisor : ${supervisors}"
+                    th:text="${supervisor.name}"
+                    th:value="${supervisor.id}">
+            </option>
+        </select>
+    </p>
+    <button type="submit" value="Submit">update</button>
+</form>
+
+</body>
+</html>

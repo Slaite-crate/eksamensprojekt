@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../styles/tables.css">
+</head>
+<body>
+
+    <p>add student</p>
+    <form action="#" th:action="@{/student/create}" th:object="${student}" method="post">
+        <p>name: <input type="text" th:field="*{name}"></p>
+        <p>email: <input type="text" th:field="*{email}"></p>
+        <p>supervisor:
+            <select th:field="*{supervisor.id}">
+                <option th:each="supervisor : ${supervisors}"
+                        th:text="${supervisor.name}"
+                        th:value="${supervisor.id}">
+                </option>
+            </select>
+        </p>
+        <button type="submit" value="Submit">create</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>email</th>
+            <th>supervisor</th>
+        </tr>
+        <tr th:each="s : ${students}">
+            <td th:text="${s.id}"></td>
+            <td th:text="${s.name}"></td>
+            <td th:text="${s.email}" ></td>
+            <td th:text="${s.supervisor.name}"></td>
+            <td><a th:href="@{student/update(id=${s.id})}"><button>update</button></a></td>
+            <td><a th:href="@{student/delete(id=${s.id})}"><button>delete</button></a></td>
+        </tr>
+    </table>
+
+</body>
+</html>
